@@ -1,8 +1,6 @@
 <!-- <wtl> project: watchthelight-labs.github.io | file: README.md | author: watchthelight </wtl> -->
 # labs.watchthelight.org
 
-> **Heads up:** a good portion of this code is AI generated. I do understand how it works, and I'm happy to explain any of it. If something looks wrong or you have a question, open an issue or ping me on Discord (`watchthelight`).
-
 The site for [watchthelight-labs](https://github.com/watchthelight-labs), live at **https://labs.watchthelight.org**.
 
 Every public repo of the org gets its own pages: the README, every other markdown file, the releases, and each issue with its comments. Links between them stay on the site. Links to code files, downloads and other people's sites open GitHub or that site in a new tab, marked with an arrow.
