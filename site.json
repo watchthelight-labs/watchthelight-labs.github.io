@@ -1,0 +1,110 @@
+{
+ "org": "watchthelight-labs",
+ "title": "watchthelight labs",
+ "url": "https://labs.watchthelight.org",
+ "tagline": "macOS drivers and tools for hardware Apple never shipped drivers for.",
+ "tagline_accent": "never shipped drivers for.",
+ "intro": "Built while getting a Lenovo Legion 5 15IAX10 to run macOS as a daily driver through OpenCore: an Arrow Lake CPU, an RTX 5070 Laptop GPU, an Intel Xe iGPU and a MediaTek MT7925 Wi-Fi 7 card, none of which macOS supports. Everything is open source, logs included.",
+ "links": [
+  {
+   "label": "GitHub",
+   "url": "https://github.com/watchthelight-labs"
+  },
+  {
+   "label": "Logs & research",
+   "url": "https://github.com/watchthelight-labs/research"
+  },
+  {
+   "label": "How we use AI",
+   "url": "https://github.com/watchthelight-labs/agents"
+  },
+  {
+   "label": "Discord: watchthelight",
+   "url": "https://discord.com/users/697169405422862417"
+  }
+ ],
+ "featured": {
+  "name": "Project Legion",
+  "machine": "Lenovo Legion 5 15IAX10",
+  "specs": [
+   "Core Ultra 9 275HX",
+   "RTX 5070 Laptop",
+   "Intel Xe (7D67)",
+   "MediaTek MT7925"
+  ],
+  "os": "macOS Tahoe 26.7.1",
+  "works": [
+   "NVIDIA graphics with Metal",
+   "macOS's own Wi-Fi menu",
+   "Bluetooth and AirPods",
+   "Audio",
+   "Touchpad and keyboard",
+   "Real CPU clocks and power"
+  ],
+  "next": "Intel Xe iGPU (XeGfx) is in hardware testing"
+ },
+ "groups": [
+  {
+   "title": "Graphics",
+   "repos": [
+    "NvGfx",
+    "XeGfx"
+   ]
+  },
+  {
+   "title": "Wi-Fi & Bluetooth",
+   "repos": [
+    "mt7925-hackintosh-wifi",
+    "mt7925-hackintosh-wifi-native",
+    "mt7925-hackintosh-bluetooth",
+    "LegionBtFix"
+   ]
+  },
+  {
+   "title": "Platform & power",
+   "repos": [
+    "LegionCpuPower",
+    "LegionCbmrFix"
+   ]
+  },
+  {
+   "title": "Input & audio",
+   "repos": [
+    "LegionI2CArrowLake",
+    "LegionITEKbdFix",
+    "VoodooHDA-Legion",
+    "numpad-arrows"
+   ]
+  },
+  {
+   "title": "Boot & EFI",
+   "repos": [
+    "Legion-5-15IAX10-OpenCore"
+   ]
+  },
+  {
+   "title": "Testing tools",
+   "repos": [
+    "gpu-guard",
+    "wifi-guard",
+    "bootdump",
+    "legion-reboot",
+    "hackintosh-feature-test",
+    "kcabi"
+   ]
+  },
+  {
+   "title": "Research & agents",
+   "repos": [
+    "research",
+    "agents"
+   ]
+  }
+ ],
+ "other_group": "More",
+ "hidden": [
+  ".github",
+  "watchthelight-labs.github.io",
+  "project-legion"
+ ]
+}
