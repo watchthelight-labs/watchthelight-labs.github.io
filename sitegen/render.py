@@ -143,7 +143,7 @@ class Pages:
         open_issues = sum(1 for i in r["issues"] if i["state"] == "open")
         sub = []
         if here != "README.md" or True:
-            sub.append(f'<a href="/{s}/"{CUR if here == "README.md" else ""}>Overview</a>')
+            sub.append(f'<a href="/{s}/"{CUR if here == "README.md" else ""}>README</a>')
         if r["releases"]:
             sub.append(f'<a href="/{s}/releases/"{CUR if here == "#releases" else ""}>Releases ({len(r["releases"])})</a>')
         if r["issues"]:
@@ -247,14 +247,14 @@ class Pages:
     <article class="prose">
       <h1>About</h1>
       {paras}
-      <h2>Get in touch</h2>
+      <h2>Contact</h2>
       <ul>{contact}</ul>
-      <p>Questions about one project are best asked on that project's issues page, so the answer helps the next person too.</p>
+      <p>If your question is about one project, ask it on that project's issues page so the answer helps the next person too.</p>
     </article>
   </main>"""
         return self.shell("/about/", "About · watchthelight labs", a["description"], body, nav="ABOUT")
 
     def not_found(self):
-        body = """  <main class="page"><article class="prose"><h1>Not here</h1>
-    <p>That page doesn't exist, or a repository was renamed. The <a href="/">repository list</a> has everything.</p></article></main>"""
+        body = """  <main class="page"><article class="prose"><h1>Page not found</h1>
+    <p>That page doesn't exist, or a repository was renamed. Everything is listed on the <a href="/">home page</a>.</p></article></main>"""
         return self.shell("/404.html", "Not found · watchthelight labs", "Page not found", body)

@@ -12,7 +12,7 @@
  "about": {
   "description": "Who builds watchthelight labs and how to reach them.",
   "paragraphs": [
-   "I'm Bash, watchthelight on GitHub and Discord. This started with one goal: use macOS as the everyday system on my Lenovo Legion 5 15IAX10.",
+   "I'm Bash, watchthelight on GitHub and Discord. I started this because I wanted macOS as the everyday system on my Lenovo Legion 5 15IAX10.",
    "Most of that laptop has no macOS support, so I write the missing parts. NvGfx and XeGfx drive the two GPUs, the mt7925 projects cover Wi-Fi and Bluetooth, and the Legion kexts handle power, input and audio. Several build on other people's work, and each repo credits them.",
    "Other machines run some of these now too: an HP OMEN 16 and another Legion use the Wi-Fi and Bluetooth drivers. If you try one on your hardware, the logs you send help the next person."
   ],
