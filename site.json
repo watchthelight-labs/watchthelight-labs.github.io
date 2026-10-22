@@ -2,27 +2,31 @@
  "org": "watchthelight-labs",
  "title": "watchthelight labs",
  "url": "https://labs.watchthelight.org",
- "tagline": "macOS drivers and tools for hardware Apple never shipped drivers for.",
- "tagline_accent": "never shipped drivers for.",
- "intro": "Built while getting a Lenovo Legion 5 15IAX10 to run macOS as a daily driver through OpenCore: an Arrow Lake CPU, an RTX 5070 Laptop GPU, an Intel Xe iGPU and a MediaTek MT7925 Wi-Fi 7 card, none of which macOS supports. Everything is open source, logs included.",
- "links": [
-  {
-   "label": "GitHub",
-   "url": "https://github.com/watchthelight-labs"
-  },
-  {
-   "label": "Logs & research",
-   "url": "https://github.com/watchthelight-labs/research"
-  },
-  {
-   "label": "How we use AI",
-   "url": "https://github.com/watchthelight-labs/agents"
-  },
-  {
-   "label": "Discord: watchthelight",
-   "url": "https://discord.com/users/697169405422862417"
-  }
- ],
+ "site_repo": "watchthelight-labs.github.io",
+ "description": "macOS drivers and tools for a Lenovo Legion 5: RTX 5070 graphics, Intel Xe, MediaTek MT7925 Wi-Fi and Bluetooth.",
+ "headline": "macOS drivers for a laptop Apple never supported.",
+ "headline_accent": "Apple never supported.",
+ "intro": "I'm getting a Lenovo Legion 5 15IAX10 to run macOS every day through OpenCore. Its Arrow Lake CPU, RTX 5070 Laptop GPU, Intel Xe iGPU and MediaTek MT7925 Wi-Fi 7 card have no macOS drivers, so these repos are the drivers and tools I wrote for them. The boot logs behind each one are public too.",
+ "research_blurb": "Boot logs from the Legion and from people who run these drivers, redacted and sorted by machine. It also keeps a daily record of what related projects changed.",
+ "agents_blurb": "The Claude Code skills, hooks and memory server I write this code with, and how they're set up. There's an installer if you want them on your own machine.",
+ "about": {
+  "description": "Who builds watchthelight labs and how to reach them.",
+  "paragraphs": [
+   "I'm Bash, watchthelight on GitHub and Discord. This started with one goal: use macOS as the everyday system on my Lenovo Legion 5 15IAX10.",
+   "Most of that laptop has no macOS support, so I write the missing parts. NvGfx and XeGfx drive the two GPUs, the mt7925 projects cover Wi-Fi and Bluetooth, and the Legion kexts handle power, input and audio. Several build on other people's work, and each repo credits them.",
+   "Other machines run some of these now too: an HP OMEN 16 and another Legion use the Wi-Fi and Bluetooth drivers. If you try one on your hardware, the logs you send help the next person."
+  ],
+  "contact": [
+   {
+    "label": "Discord: watchthelight",
+    "url": "https://discord.com/users/697169405422862417"
+   },
+   {
+    "label": "GitHub: watchthelight-labs",
+    "url": "https://github.com/watchthelight-labs"
+   }
+  ]
+ },
  "featured": {
   "name": "Project Legion",
   "machine": "Lenovo Legion 5 15IAX10",

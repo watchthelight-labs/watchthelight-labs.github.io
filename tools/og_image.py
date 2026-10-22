@@ -1,59 +1,74 @@
 #!/usr/bin/env python3
 # <wtl> project: watchthelight-labs.github.io | file: tools/og_image.py | author: watchthelight </wtl>
-"""Draw src/og.png (1200x630), the link preview Discord and others show: the starfield, the mark, the name, the
-tagline, the address. Deterministic, so rebuilding it gives the same image.
+"""Link-preview images (1200x630): the starfield, the sage mark and a name. Nothing else.
 
-  python tools/og_image.py --font-bold SpaceMono-Bold.ttf --font SpaceMono-Regular.ttf
+  python tools/og_image.py site OUT.png                 # "watchthelight labs"
+  python tools/og_image.py repo OUT.png NAME            # the repo name, with "watchthelight labs" small above it
+
+Fonts: tools/fonts/SpaceMono-Bold.ttf and -Regular.ttf (SIL OFL, see tools/fonts/OFL.txt). Deterministic per
+name, so a rebuild gives the same image.
 """
-import argparse
 import random
+import sys
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = Path(__file__).resolve().parents[1]
+FONTS = Path(__file__).resolve().parent / "fonts"
 W, H = 1200, 630
-BG, TEXT, DIM, SAGE, FAINT = (8, 8, 12), (225, 229, 232), (138, 142, 150), (106, 154, 110), (42, 45, 51)
+BG, TEXT, DIM, SAGE, FAINT = (8, 8, 12), (225, 229, 232), (110, 114, 122), (106, 154, 110), (42, 45, 51)
+
+
+def stars(d, seed, keep_clear):
+    rnd = random.Random(seed)
+    x0, y0, x1, y1 = keep_clear
+    for _ in range(380):
+        x, y = rnd.randrange(W), rnd.randrange(H)
+        if x0 < x < x1 and y0 < y < y1:
+            continue
+        a = rnd.uniform(0.15, 0.7)
+        s = 2 if rnd.random() < 0.18 else 1
+        col = SAGE if rnd.random() < 0.08 else (200, 210, 220)
+        d.rectangle([x, y, x + s - 1, y + s - 1], fill=tuple(int(BG[i] + (col[i] - BG[i]) * a) for i in range(3)))
+
+
+def fit(text, size, max_w):
+    """Largest Space Mono Bold size (down from `size`) at which `text` fits in max_w pixels."""
+    while size > 28:
+        f = ImageFont.truetype(str(FONTS / "SpaceMono-Bold.ttf"), size)
+        if f.getlength(text) <= max_w:
+            return f
+        size -= 4
+    return ImageFont.truetype(str(FONTS / "SpaceMono-Bold.ttf"), size)
+
+
+def draw(out: Path, title: str, kicker: str = ""):
+    img = Image.new("RGB", (W, H), BG)
+    d = ImageDraw.Draw(img)
+    left, max_w = 96, W - 96 * 2 - 44
+    big = fit(title, 76, max_w)
+    tw = big.getlength(title)
+    cy = H // 2
+    stars(d, title, (left - 30, cy - 120, left + 44 + tw + 30, cy + 90))
+    asc, desc = big.getmetrics()
+    ty = cy - (asc + desc) // 2
+    d.rectangle([left, cy - 4, left + 21, cy + 17], fill=SAGE)                  # the mark, level with the x-height
+    d.text((left + 44, ty), title, font=big, fill=TEXT)
+    if kicker:
+        small = ImageFont.truetype(str(FONTS / "SpaceMono-Regular.ttf"), 24)
+        d.text((left + 44, ty - 34), kicker, font=small, fill=DIM)
+    d.rectangle([0, H - 4, W, H], fill=FAINT)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    img.save(out, optimize=True)
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--font-bold", required=True)
-    ap.add_argument("--font", required=True)
-    a = ap.parse_args()
-    img = Image.new("RGB", (W, H), BG)
-    d = ImageDraw.Draw(img)
-    rnd = random.Random(1401)
-    # square-pixel stars, denser at the top right, kept clear of the text block
-    for _ in range(420):
-        x, y = rnd.randrange(W), rnd.randrange(H)
-        if 70 < x < 860 and 180 < y < 500:
-            continue
-        a_ = rnd.uniform(0.15, 0.7)
-        s = 2 if rnd.random() < 0.18 else 1
-        col = SAGE if rnd.random() < 0.08 else (200, 210, 220)
-        c = tuple(int(BG[i] + (col[i] - BG[i]) * a_) for i in range(3))
-        d.rectangle([x, y, x + s - 1, y + s - 1], fill=c)
-    # one shooting star
-    for i in range(110):
-        t = i / 110
-        x, y = int(860 + i * 2.2), int(70 + i * 0.9)
-        c = tuple(int(BG[k] + (200 - BG[k]) * t * 0.75) for k in range(3))
-        d.point((x, y), fill=c)
-    bold = ImageFont.truetype(a.font_bold, 68)
-    reg = ImageFont.truetype(a.font, 27)
-    small = ImageFont.truetype(a.font, 22)
-    left, top = 90, 210
-    d.rectangle([left, top + 47, left + 21, top + 68], fill=SAGE)               # the mark
-    d.text((left + 44, top - 4), "watchthelight labs", font=bold, fill=TEXT)
-    d.rectangle([left, top + 104, left + 120, top + 105], fill=SAGE)            # thin sage rule
-    d.text((left, top + 128), "macOS drivers and tools for hardware", font=reg, fill=DIM)
-    d.text((left, top + 166), "Apple never shipped drivers for.", font=reg, fill=SAGE)
-    d.text((left, H - 78), "labs.watchthelight.org", font=small, fill=DIM)
-    d.rectangle([0, H - 4, W, H], fill=FAINT)
-    out = ROOT / "src" / "og.png"
-    img.save(out, optimize=True)
-    print(f"wrote {out} ({out.stat().st_size // 1024} KB)")
+    mode, out = sys.argv[1], Path(sys.argv[2])
+    if mode == "site":
+        draw(out, "watchthelight labs")
+    else:
+        draw(out, sys.argv[3], "watchthelight labs")
+    print(f"wrote {out}")
 
 
 if __name__ == "__main__":

@@ -18,13 +18,19 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+      - name: pillow (link-preview images)
+        run: python3 -m pip install --quiet pillow
       - name: build
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python3 build.py
+      - name: check links
+        run: python3 tools/check_links.py
+      - name: check the site's own text
+        run: python3 tools/lint_text.py site.json src/page.html sitegen/render.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
