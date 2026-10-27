@@ -45,7 +45,7 @@
    "Touchpad and keyboard",
    "Real CPU clocks and power"
   ],
-  "next": "Intel Xe iGPU (XeGfx) is in hardware testing"
+  "next": "Intel Xe iGPU (XeGfx) draws the desktop but still crashes after minutes; macOS 26.7.2 (25G332) is not supported by the Wi-Fi driver yet"
  },
  "groups": [
   {
