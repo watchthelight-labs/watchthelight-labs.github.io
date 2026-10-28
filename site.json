@@ -14,7 +14,7 @@
   "paragraphs": [
    "I'm Bash, watchthelight on GitHub and Discord. I started this because I wanted macOS as the everyday system on my Lenovo Legion 5 15IAX10.",
    "Most of that laptop has no macOS support, so I write the missing parts. NvGfx and XeGfx drive the two GPUs, the mt7925 projects cover Wi-Fi and Bluetooth, and the Legion kexts handle power, input and audio. Several build on other people's work, and each repo credits them.",
-   "Other machines run some of these now too: an HP OMEN 16 and another Legion use the Wi-Fi and Bluetooth drivers. If you try one on your hardware, the logs you send help the next person."
+   "Other machines run some of these now too. The Wi-Fi and Bluetooth drivers work on an HP OMEN 16, another Legion and an ASUS B860 desktop, and the Bluetooth loader on an ASRock X870 and a Dell Latitude 5421. XeGfx runs on a second Core Ultra 9 275HX laptop and, with some tweaks of the tester's own, on a Meteor Lake 155H. LegionI2CArrowLake drives the touchpad on another Arrow Lake laptop. If you try one on your hardware, the logs you send help the next person."
   ],
   "contact": [
    {
@@ -36,16 +36,17 @@
    "Intel Xe (7D67)",
    "MediaTek MT7925"
   ],
-  "os": "macOS Tahoe 26.7.1",
+  "os": "macOS Tahoe 26.7.2",
   "works": [
    "NVIDIA graphics with Metal",
+   "Intel graphics with Metal and Vulkan (XeGfx)",
    "macOS's own Wi-Fi menu",
    "Bluetooth and AirPods",
    "Audio",
    "Touchpad and keyboard",
    "Real CPU clocks and power"
   ],
-  "next": "Intel Xe iGPU (XeGfx) draws the desktop; the longest run lasted 88 minutes before the machine stalled under heavy disk work. On macOS 26.7.2 (25G332) the native Wi-Fi front end does not attach (user report), so stay on 26.7.1 for now"
+  "next": "XeGfx is still a test driver: the desktop composites on the Intel GPU at 165 Hz for hours at a time, but one kernel panic under heavy disk reads is open. Since 2026-10-28 the Legion runs macOS 26.7.2 (25G332), with Wi-Fi from MtkWlanNative 0.4.14 and Bluetooth from LegionBtFix 0.3.0"
  },
  "groups": [
   {
@@ -111,5 +112,6 @@
   ".github",
   "watchthelight-labs.github.io",
   "project-legion"
- ]
+ ],
+ "macos": "26.7.2"
 }

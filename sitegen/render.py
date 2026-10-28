@@ -99,7 +99,7 @@ class Pages:
       <div class="stats" role="list">
         <div role="listitem"><b>{len(shown)}</b><small>repositories</small></div>
         <div role="listitem"><b>{sum(1 for r in shown if r['release'])}</b><small>with releases</small></div>
-        <div role="listitem"><b>26.7.1</b><small>macOS Tahoe</small></div>
+        <div role="listitem"><b>{esc(s.get('macos', '26.7.2'))}</b><small>macOS Tahoe</small></div>
       </div>
     </section>
     <section class="legion" aria-labelledby="legion-title">
