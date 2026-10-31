@@ -10,6 +10,7 @@ rendered by GitHub and with links to our own content pointed back into the site 
 rebuilds. Needs Pillow for the link-preview images.
 """
 import argparse
+import html
 import datetime as dt
 import json
 import shutil
@@ -36,6 +37,13 @@ def write(path: str, text: str, seen: dict, origin: str):
     seen[f] = origin
     f.parent.mkdir(parents=True, exist_ok=True)
     f.write_text(text, encoding="utf-8", newline="\n")
+
+
+def redirect_page(target: str) -> str:
+    t = html.escape(target, quote=True)
+    return (f'<!doctype html><meta charset="utf-8"><title>Moved</title><link rel="canonical" href="{t}">'
+            f'<meta http-equiv="refresh" content="0; url={t}"><meta name="robots" content="noindex">'
+            f'<script>location.replace("{t}" + location.hash)</script><p>Moved to <a href="{t}">{t}</a>.</p>\n')
 
 
 def main():
@@ -82,6 +90,11 @@ def main():
             for i in r["issues"]:
                 write(f"/{s}/issues/{i['number']}/", pages.issue_page(r, i, linker), seen, f"{n} #{i['number']}")
                 urls.append(f"/{s}/issues/{i['number']}/")
+
+    # old repo names keep working: every page of a renamed repo gets a stub at its old path
+    for old, new in site.get("renamed", {}).items():
+        for u in [u for u in urls if u.startswith(f"/{new}/")]:
+            write(f"/{old}/" + u[len(new) + 2:], redirect_page(site["url"] + u), seen, f"{old} -> {new}")
 
     base = site["url"]
     (DIST / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

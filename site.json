@@ -52,51 +52,51 @@
   {
    "title": "Graphics",
    "repos": [
-    "NvGfx",
-    "XeGfx",
-    "LegionHybrid"
+    "WTLNvidiaGfx",
+    "WTLIntelGfx",
+    "WTLHybridGfx"
    ]
   },
   {
    "title": "Wi-Fi & Bluetooth",
    "repos": [
-    "mt7925-hackintosh-wifi",
-    "mt7925-hackintosh-wifi-native",
-    "mt7925-hackintosh-bluetooth",
-    "LegionBtFix"
+    "WTLMtkWireless",
+    "WTLWifiMenu",
+    "WTLMtkBluetooth",
+    "WTLLegionBtFix"
    ]
   },
   {
    "title": "Platform & power",
    "repos": [
-    "LegionCpuPower",
-    "LegionCbmrFix"
+    "WTLLegionCpuPower",
+    "WTLLegionCbmrFix"
    ]
   },
   {
    "title": "Input & audio",
    "repos": [
-    "LegionI2CArrowLake",
-    "LegionITEKbdFix",
-    "VoodooHDA-Legion",
-    "numpad-arrows"
+    "WTLI2CArrowLake",
+    "WTLLegionITEKbdFix",
+    "WTLAudio",
+    "WTLNumpadKeys"
    ]
   },
   {
    "title": "Boot & EFI",
    "repos": [
-    "Legion-5-15IAX10-OpenCore"
+    "WTLLegionOpenCore"
    ]
   },
   {
    "title": "Testing tools",
    "repos": [
-    "gpu-guard",
-    "wifi-guard",
-    "bootdump",
-    "legion-reboot",
-    "hackintosh-feature-test",
-    "kcabi"
+    "WTLGpuGuard",
+    "WTLWifiGuard",
+    "WTLBootDump",
+    "WTLStagedReboot",
+    "WTLHackintoshTest",
+    "WTLKcAbi"
    ]
   },
   {
@@ -113,5 +113,27 @@
   "watchthelight-labs.github.io",
   "project-legion"
  ],
- "macos": "26.7.2"
+ "macos": "26.7.2",
+ "renamed": {
+  "mt7925-hackintosh-wifi": "WTLMtkWireless",
+  "mt7925-hackintosh-wifi-native": "WTLWifiMenu",
+  "mt7925-hackintosh-bluetooth": "WTLMtkBluetooth",
+  "LegionBtFix": "WTLLegionBtFix",
+  "XeGfx": "WTLIntelGfx",
+  "NvGfx": "WTLNvidiaGfx",
+  "LegionCpuPower": "WTLLegionCpuPower",
+  "LegionHybrid": "WTLHybridGfx",
+  "LegionCbmrFix": "WTLLegionCbmrFix",
+  "LegionI2CArrowLake": "WTLI2CArrowLake",
+  "LegionITEKbdFix": "WTLLegionITEKbdFix",
+  "VoodooHDA-Legion": "WTLAudio",
+  "Legion-5-15IAX10-OpenCore": "WTLLegionOpenCore",
+  "gpu-guard": "WTLGpuGuard",
+  "wifi-guard": "WTLWifiGuard",
+  "kcabi": "WTLKcAbi",
+  "bootdump": "WTLBootDump",
+  "legion-reboot": "WTLStagedReboot",
+  "numpad-arrows": "WTLNumpadKeys",
+  "hackintosh-feature-test": "WTLHackintoshTest"
+ }
 }
