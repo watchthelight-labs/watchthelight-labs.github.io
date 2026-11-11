@@ -46,7 +46,7 @@
    "Touchpad and keyboard",
    "Real CPU clocks and power"
   ],
-  "next": "XeGfx is still a test driver: the desktop composites on the Intel GPU at 165 Hz for hours at a time, but one kernel panic under heavy disk reads is open. Since 2026-10-28 the Legion runs macOS 26.7.2 (25G332), with Wi-Fi from MtkWlanNative 0.4.14 and Bluetooth from LegionBtFix 0.3.0"
+  "next": "XeGfx is still a test driver: the desktop composites on the Intel GPU at 165 Hz for hours at a time, but one kernel panic under heavy disk reads is open. Wi-Fi and Bluetooth come from one kext since 2026-11-10 (WTLWireless 0.14.0, tested on the macOS 26.7.3 developer beta, 25G416). NVIDIA graphics were last checked on macOS 26.7.2 (25G332)"
  },
  "groups": [
   {
@@ -60,9 +60,7 @@
   {
    "title": "Wi-Fi & Bluetooth",
    "repos": [
-    "WTLMtkWireless",
-    "WTLWifiMenu",
-    "WTLMtkBluetooth",
+    "WTLWireless",
     "WTLLegionBtFix"
    ]
   },
@@ -111,13 +109,18 @@
  "hidden": [
   ".github",
   "watchthelight-labs.github.io",
-  "project-legion"
+  "project-legion",
+  "WTLWifiMenu",
+  "WTLMtkBluetooth"
  ],
  "macos": "26.7.2",
  "renamed": {
-  "mt7925-hackintosh-wifi": "WTLMtkWireless",
-  "mt7925-hackintosh-wifi-native": "WTLWifiMenu",
-  "mt7925-hackintosh-bluetooth": "WTLMtkBluetooth",
+  "mt7925-hackintosh-wifi": "WTLWireless",
+  "mt7925-hackintosh-wifi-native": "WTLWireless",
+  "mt7925-hackintosh-bluetooth": "WTLWireless",
+  "WTLMtkWireless": "WTLWireless",
+  "WTLWifiMenu": "WTLWireless",
+  "WTLMtkBluetooth": "WTLWireless",
   "LegionBtFix": "WTLLegionBtFix",
   "XeGfx": "WTLIntelGfx",
   "NvGfx": "WTLNvidiaGfx",
