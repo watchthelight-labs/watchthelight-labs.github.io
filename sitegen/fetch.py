@@ -5,10 +5,12 @@ HTML by GitHub (Accept: application/vnd.github.html+json), releases, issues and 
 With cache=True every response is kept in .cache/ (local runs only; CI always fetches fresh).
 """
 import hashlib
+import http.client
 import json
 import os
 import re
 import subprocess
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -44,13 +46,21 @@ class GitHub:
         req = urllib.request.Request(url, headers={"Accept": accept, "X-GitHub-Api-Version": "2022-11-28",
                                                    **({"Authorization": f"Bearer {self.token}"} if self.token else {})})
         self.calls += 1
-        try:
-            with urllib.request.urlopen(req, timeout=60) as r:
-                text = r.read().decode("utf-8")
-        except urllib.error.HTTPError as e:
-            if e.code in (404, 409):
-                return None
-            raise
+        # A dropped connection or a 5xx from GitHub used to fail the whole build; try a few times first.
+        for attempt in range(4):
+            try:
+                with urllib.request.urlopen(req, timeout=60) as r:
+                    text = r.read().decode("utf-8")
+                break
+            except urllib.error.HTTPError as e:
+                if e.code in (404, 409):
+                    return None
+                if e.code < 500 or attempt == 3:
+                    raise
+            except (urllib.error.URLError, ConnectionError, TimeoutError, http.client.HTTPException):
+                if attempt == 3:
+                    raise
+            time.sleep(5 * (attempt + 1))
         if self.cache:
             CACHE.mkdir(exist_ok=True)
             key.write_text(text, encoding="utf-8")
